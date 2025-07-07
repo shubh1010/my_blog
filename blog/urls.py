@@ -1,7 +1,9 @@
-from django.urls import path
-from . import views
+from django.contrib import admin
+from django.urls import path, include
+from blog import views  # Make sure blog is in INSTALLED_APPS
 
 urlpatterns = [
-    path('', views.index, name='index'),      # Root URL serves the index view (welcome message)
-    path('home/', views.home, name='home'),   # /home/ URL serves the blog posts listing
+    path('admin/', admin.site.urls),
+    path('', views.post_list, name='home'),  # Root URL shows published blog posts
+    path('posts/', include('blog.urls')),    # Routes for detailed post views etc.
 ]
