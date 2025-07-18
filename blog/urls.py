@@ -1,9 +1,19 @@
-from django.contrib import admin
-from django.urls import path, include
-from blog import views  # Make sure blog is in INSTALLED_APPS
+from django.shortcuts import render, get_object_or_404
+from .models import Post
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.post_list, name='home'),  # Root URL shows published blog posts
-    path('posts/', include('blog.urls')),    # Routes for detailed post views etc.
-]
+def post_list(request):
+    posts = Post.objects.filter(status='published').order_by('-created')
+    return render(request, 'blog/post_list.html', {'posts': posts})
+
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug, status='published')
+    return render(request, 'blog/post_detail.html', {'post': post})from django.shortcuts import render, get_object_or_404
+from .models import Post
+
+def post_list(request):
+    posts = Post.objects.filter(status='published').order_by('-created')
+    return render(request, 'blog/post_list.html', {'posts': posts})
+
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug, status='published')
+    return render(request, 'blog/post_detail.html', {'post': post})

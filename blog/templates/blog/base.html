@@ -1,51 +1,36 @@
-<!-- blog/templates/base.html -->
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}My Blog{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: sans-serif;
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-            line-height: 1.6;
-            background-color: #f7f7f7;
-            color: #333;
-        }
-        header, footer {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        nav a {
-            margin-right: 1rem;
-            text-decoration: none;
-            color: #007bff;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header>
-        <h1>My Blog</h1>
+    <div class="container">
+        <header>
+            <h1><a href="{% url 'home' %}">My Blog</a></h1>
+        </header>
+
         <nav>
-            <a href="{% url 'home' %}">Home</a>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
         </nav>
-        <hr>
-    </header>
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+        <div class="main-content">
+            <aside class="sidebar">
+                {% block sidebar %}{% endblock %}
+            </aside>
 
-    <footer>
-        <hr>
-        <p>&copy; 2025 - Shubh's Blog</p>
-    </footer>
+            <section class="content">
+                {% block content %}{% endblock %}
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 My Blog. All rights reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>

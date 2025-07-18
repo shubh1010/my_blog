@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.main-content {
+    display: flex;
+    gap: 20px;
+}
+
+.sidebar {
+    width: 25%;
+    background-color: #f5f5f5;
+    padding: 1em;
+    border-right: 1px solid #ccc;
+}
+
+.content {
+    width: 75%;
+}
