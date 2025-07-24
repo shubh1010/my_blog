@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Topics{% endblock %}
+
+{% block content %}
+  <h1>Topics</h1>
+  <ul>
+    {% for topic in topics %}
+      <li>{{ topic.name }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}{% extends "base.html" %}
+
+{% block title %}Topics{% endblock %}
+
+{% block content %}
+  <h1>Topics</h1>
+  <ul>
+    {% for topic in topics %}
+      <li>{{ topic.name }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

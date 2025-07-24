@@ -1,12 +1,10 @@
-{% extends 'blog/base.html' %}
-
 {% block title %}Home - My Blog{% endblock %}
 
 {% block sidebar %}
     <h3>Top Topics</h3>
     <ul>
         {% for topic in topics %}
-            <li>{{ topic.name }} ({{ topic.post_count }})</li>
+            <li><a href="{% url 'topic_detail' slug=topic.slug %}">{{ topic.name }}</a> ({{ topic.post_count }})</li>
         {% empty %}
             <li>No topics available.</li>
         {% endfor %}

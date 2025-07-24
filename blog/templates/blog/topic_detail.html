@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+  <h1>{{ topic.name }}</h1>
+
+  {% if topic.description %}
+    <p>{{ topic.description }}</p>
+  {% endif %}
+
+  <h2>Posts in this topic:</h2>
+  <ul>
+    {% for post in topic.posts.all %}
+      <li>
+        <a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a>
+      </li>
+    {% empty %}
+      <li>No posts available in this topic.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

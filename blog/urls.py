@@ -1,19 +1,9 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Post
+from django.urls import path
+from . import views
 
-def post_list(request):
-    posts = Post.objects.filter(status='published').order_by('-created')
-    return render(request, 'blog/post_list.html', {'posts': posts})
-
-def post_detail(request, slug):
-    post = get_object_or_404(Post, slug=slug, status='published')
-    return render(request, 'blog/post_detail.html', {'post': post})from django.shortcuts import render, get_object_or_404
-from .models import Post
-
-def post_list(request):
-    posts = Post.objects.filter(status='published').order_by('-created')
-    return render(request, 'blog/post_list.html', {'posts': posts})
-
-def post_detail(request, slug):
-    post = get_object_or_404(Post, slug=slug, status='published')
-    return render(request, 'blog/post_detail.html', {'post': post})
+urlpatterns = [
+    path('', views.post_list, name='home'),
+    path('topics/', views.TopicListView.as_view(), name='topic_list'),
+    path('topics/<slug:slug>/', views.TopicDetailView.as_view(), name='topic_detail'),
+    path('<slug:slug>/', views.post_detail, name='post_detail'),
+]

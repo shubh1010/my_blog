@@ -1,5 +1,16 @@
 {% extends "blog/base.html" %}
 
+{% block sidebar %}
+  <h3>Top Topics</h3>
+  <ul>
+      {% for topic in topics %}
+          <li>{{ topic.name }} ({{ topic.post_count }})</li>
+      {% empty %}
+          <li>No topics available.</li>
+      {% endfor %}
+  </ul>
+{% endblock %}
+
 {% block content %}
   <h1>{{ post.title }}</h1>
   <p><em>Published on {{ post.created|date:"F j, Y" }}</em></p>
