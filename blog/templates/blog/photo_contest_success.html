@@ -1,0 +1,13 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<h1>Thank you for your submission!</h1>
+<p>Your photo contest entry has been received. Good luck!</p>
+
+<!-- Button to view all submissions -->
+<p>
+  <a href="{% url 'photo_contest_submissions_list' %}">
+    <button type="button">View All Submissions</button>
+  </a>
+</p>
+{% endblock %}

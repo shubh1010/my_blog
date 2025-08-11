@@ -1,0 +1,18 @@
+{% if next %}
+  <script>
+    // Redirect to the 'next' URL (the page the user was on before logging out)
+    window.location.href = "{{ next }}";
+  </script>
+{% else %}
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Logged Out</title>
+  </head>
+  <body>
+    <p>You have been logged out.</p>
+    <a href="/">Return to homepage</a>
+  </body>
+  </html>
+{% endif %}

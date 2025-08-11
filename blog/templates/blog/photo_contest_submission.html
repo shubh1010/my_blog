@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<h1>Photo Contest</h1>
+<p>Submit your photo along with your name and email address and the best photo taken will win. Go out and take great photos!</p>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+<!-- Button to view all submissions -->
+<p>
+  <a href="{% url 'photo_contest_submissions_list' %}">
+    <button type="button">View All Submissions</button>
+  </a>
+</p>
+{% endblock %}

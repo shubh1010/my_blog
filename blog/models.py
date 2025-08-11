@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.text import slugify
 
+# ✅ Import CKEditor rich text upload field
+from ckeditor_uploader.fields import RichTextUploadingField
+
+
 class Topic(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(unique=True)
@@ -23,7 +27,10 @@ class Post(models.Model):
     ]
 
     title = models.CharField(max_length=200)
-    content = models.TextField()
+
+    # ✅ Changed from TextField to RichTextUploadingField
+    content = RichTextUploadingField()
+
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -60,3 +67,17 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.name} on {self.post}'
+
+
+# New model for the photo contest
+class PhotoContestSubmission(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    image = models.ImageField(upload_to='contest_images/')
+    submission_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-submission_date']
+
+    def __str__(self):
+        return f"{self.name} - {self.submission_date.strftime('%Y-%m-%d %H:%M')}"

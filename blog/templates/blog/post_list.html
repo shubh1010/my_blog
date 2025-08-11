@@ -1,24 +1,35 @@
+{% extends "blog/base.html" %}
+
 {% block title %}Home - My Blog{% endblock %}
 
 {% block sidebar %}
-    <h3>Top Topics</h3>
-    <ul>
-        {% for topic in topics %}
-            <li><a href="{% url 'topic_detail' slug=topic.slug %}">{{ topic.name }}</a> ({{ topic.post_count }})</li>
-        {% empty %}
-            <li>No topics available.</li>
-        {% endfor %}
-    </ul>
+  <h3>Top Topics</h3>
+  <ul>
+      {% for topic in topics %}
+          <li>
+              <a href="{% url 'topic_detail' slug=topic.slug %}">
+                  {{ topic.name }}
+              </a> ({{ topic.post_count }})
+          </li>
+      {% empty %}
+          <li>No topics available.</li>
+      {% endfor %}
+  </ul>
 {% endblock %}
 
 {% block content %}
-    <h2>Published Posts</h2>
-    {% for post in posts %}
-        <article>
-            <h3><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h3>
-            <p>Published on {{ post.created }}</p>
-        </article>
-    {% empty %}
-        <p>No posts available.</p>
-    {% endfor %}
+  <h1>Published Posts</h1>
+
+  {% for post in posts %}
+    <article class="post-summary">
+      <h2>
+        <a href="{% url 'post_detail' slug=post.slug %}">
+          {{ post.title }}
+        </a>
+      </h2>
+      <p><em>Published on {{ post.created|date:"F j, Y" }}</em></p>
+    </article>
+  {% empty %}
+    <p>No posts available.</p>
+  {% endfor %}
 {% endblock %}

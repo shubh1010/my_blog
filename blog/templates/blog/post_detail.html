@@ -14,7 +14,9 @@
 {% block content %}
   <h1>{{ post.title }}</h1>
   <p><em>Published on {{ post.created|date:"F j, Y" }}</em></p>
-  <p>{{ post.content|linebreaks }}</p>
+
+  {# ✅ Use safe filter to render HTML properly #}
+  <section class="content">{{ post.content|safe }}</section>
 
   <p><a href="{% url 'home' %}">← Back to all posts</a></p>
 {% endblock %}

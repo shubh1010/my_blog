@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+  <h1>Photo Contest Submissions</h1>
+
+  <form method="get" style="margin-bottom: 1rem;">
+    <input type="text" name="search" placeholder="Search by name or email" value="{{ request.GET.search|default:'' }}">
+    <select name="order_by">
+      <option value="-submission_date" {% if request.GET.order_by == "-submission_date" or not request.GET.order_by %}selected{% endif %}>Newest First</option>
+      <option value="submission_date" {% if request.GET.order_by == "submission_date" %}selected{% endif %}>Oldest First</option>
+      <option value="name" {% if request.GET.order_by == "name" %}selected{% endif %}>Name (A-Z)</option>
+      <option value="-name" {% if request.GET.order_by == "-name" %}selected{% endif %}>Name (Z-A)</option>
+      <option value="email" {% if request.GET.order_by == "email" %}selected{% endif %}>Email (A-Z)</option>
+      <option value="-email" {% if request.GET.order_by == "-email" %}selected{% endif %}>Email (Z-A)</option>
+    </select>
+    <button type="submit">Filter</button>
+  </form>
+
+  {% if submissions %}
+    <ul>
+      {% for submission in submissions %}
+        <li>
+          <strong>{{ submission.name }}</strong> - {{ submission.email }}<br>
+          <img src="{{ submission.image.url }}" alt="Submitted Photo" style="max-width: 300px;"><br>
+          Submitted on {{ submission.submission_date|date:"F j, Y, g:i a" }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No submissions yet.</p>
+  {% endif %}
+{% endblock %}
